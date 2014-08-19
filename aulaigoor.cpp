@@ -67,3 +67,20 @@ void aulaigoor::conectar()
                                   "Falha ao preparar consulta do banco" + erro + "\n",
                                   QMessageBox::Cancel);
         }
+ else if (qry.next())
+            QMessageBox::information(this, "Banco Tutorial",
+                                     "Conexão realizada com sucesso com o Banco ["
+                                     + ui->edt_esquema->text() + "]\n[" + qry.value(0).toDateTime().toString() + "]" ,
+                                     QMessageBox::Ok);
+
+        habilitarQuery(true);
+        ui->txt_sql->setFocus();
+}
+
+void aulaigoor::desconectar()
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    db.close();
+    this->habilitarQuery(false);
+    ui->edt_esquema->setFocus();
+}
