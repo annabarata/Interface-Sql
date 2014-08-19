@@ -46,3 +46,24 @@ if(ui->edt_esquema->text().trimmed().isEmpty())
 }
 conectar();
 }
+void aulaigoor::conectar()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName(ui->edt_esquema->text().trimmed());
+
+        if (!db.open())
+        {
+            QMessageBox::critical(this, "Falha na Conexão",
+                                  "Falha na conexão com o Banco [" + ui->edt_esquema->text() + "]\n" + db.lastError().text(),
+                                  QMessageBox::Cancel);
+            return;
+        }
+
+        QSqlQuery qry;
+        qry.prepare("SELECT datetime('now')");
+        if (!qry.exec()){
+            QString erro = qry.lastError().text();
+            QMessageBox::critical(this, "Falha na Conexão",
+                                  "Falha ao preparar consulta do banco" + erro + "\n",
+                                  QMessageBox::Cancel);
+        }
