@@ -115,3 +115,30 @@ void aulaigoor::executarSql()
                                      "Instrução SQL executada com sucesso");
 
         }
+        else
+        {
+            QStringList sqls = sql.split(";");
+            QString strRows;
+
+            int numRows = 0;
+            for (int i = 0; i < sqls.size(); i++)
+            {
+                QString tmpSql = sqls.at(i);
+                if (tmpSql.trimmed().isEmpty())
+                    continue;
+
+                QSqlQuery qry;
+                qry.prepare(sqls.at(i));
+                if (!qry.exec())
+                {
+                    strRows.setNum(numRows);
+                    QString numScript;
+                    numScript.setNum(i+1);
+                    QMessageBox::critical(this, "SOQH SQL - ERRO",
+                                          "Falha ao executar script [" + numScript + "]\n[" + strRows + "] linha(s) afetada(s)\n" + qry.lastError().text());
+                    ui->txt_sql->setFocus();
+                    return;
+                }
+
+                numRows += qry.numRowsAffected();
+            }
