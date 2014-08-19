@@ -142,3 +142,21 @@ void aulaigoor::executarSql()
 
                 numRows += qry.numRowsAffected();
             }
+
+            strRows.setNum(numRows);
+            QMessageBox::information(this, "SOQH SQL",
+                                     "Instrução SQL executada com sucesso\n[" + strRows + "] linha(s) afetadas(s)");
+        }
+}
+
+void aulaigoor::habilitarQuery(bool ativo)
+{
+ui->btn_desconectar->setEnabled(ativo);
+ui->btn_executar->setEnabled(ativo);
+ui->txt_sql->setEnabled(ativo);
+ui->tbl_sql->setEnabled(ativo);
+
+ui->btn_conectar->setDisabled(ativo);
+ui->edt_esquema->setDisabled(ativo);
+
+}
