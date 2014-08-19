@@ -24,3 +24,25 @@ aulaigoor::aulaigoor(QWidget *parent) :
     txt_query = new QSqlQueryModel;
 
 }
+
+aulaigoor::~aulaigoor()
+{
+    delete txt_query;
+    delete ui;
+}
+
+void aulaigoor::valoresIniciais()
+{
+ ui->edt_esquema->setText("banco.db");
+}
+void aulaigoor::validarCampos()
+{
+if(ui->edt_esquema->text().trimmed().isEmpty())
+{
+    QMessageBox::critical(this, "Deu Bosta", "Digite o Nome Do Banco De Dados");
+    ui->edt_esquema->setFocus();
+    return;
+
+}
+conectar();
+}
