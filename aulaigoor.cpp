@@ -84,3 +84,34 @@ void aulaigoor::desconectar()
     this->habilitarQuery(false);
     ui->edt_esquema->setFocus();
 }
+
+void aulaigoor::executarSql()
+{
+    txt_query->clear();
+        ui->tbl_sql->setModel(NULL);
+
+        if(ui->txt_sql->toPlainText().trimmed().isEmpty())
+        {
+            QMessageBox::information(this, "Instrução SQL",
+                                     "Não há instrução SQL a ser executada");
+            ui->txt_sql->setFocus();
+            return;
+        }
+
+        QString sql = ui->txt_sql->toPlainText();
+        if (sql.toUpper().startsWith("SELECT"))
+        {
+            txt_query->setQuery(sql);
+            ui->tbl_sql->setModel(txt_query);
+            if (txt_query->lastError().isValid())
+            {
+                QMessageBox::critical(this, "SOQH SQL - ERRO",
+                                      txt_query->lastError().text());
+                ui->txt_sql->setFocus();
+                return;
+            }
+
+            QMessageBox::information(this, "SOQH SQL",
+                                     "Instrução SQL executada com sucesso");
+
+        }
