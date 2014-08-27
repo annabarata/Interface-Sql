@@ -16,3 +16,21 @@ public slots:
     void validarCampos();
     void desconectar ();
     void executarSql ();
+
+
+public:
+    explicit aulaigoor(QWidget *parent = 0);
+    ~aulaigoor();
+
+private:
+    Ui::aulaigoor *ui;
+    QSqlQueryModel *txt_query;
+    void habilitarQuery (bool ativo);
+    void valoresIniciais();
+    void conectar();
+
+
+
+};
+
+#endif // AULAIGOOR_H
