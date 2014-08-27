@@ -6,3 +6,13 @@
 
 namespace Ui {
 class aulaigoor;
+}
+
+class aulaigoor : public QDialog
+{
+    Q_OBJECT
+
+public slots:
+    void validarCampos();
+    void desconectar ();
+    void executarSql ();
