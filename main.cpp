@@ -4,6 +4,7 @@
 
 int main(int argc, char *argv[])
 {
+	int test = 0;
     QApplication app (argc, argv);
 
     aulaigoor form;
@@ -11,5 +12,6 @@ int main(int argc, char *argv[])
 
     return app.exec();
     //teste2
+
 
 }
