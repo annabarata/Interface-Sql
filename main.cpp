@@ -10,6 +10,9 @@ int main(int argc, char *argv[])
     form.show();
 
     return app.exec();
+
     //teste2
+
+
 
 }
